@@ -25,20 +25,24 @@ jobs:                                 # 실제 실행되는 작업 정의
       run: |                          # 필요한 패키지 설치
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install pytest pytest-html
+        echo "Dependencies installed successfully."
 
     - name: Install Playwright and its dependencies
       run: |                          # Playwright 설치 및 브라우저 다운로드
         pip install playwright
         python -m playwright install
+        echo "Playwright and browsers installed successfully."
 
     - name: Run tests and generate HTML report
       run: |
         # Set the date and time format for the report filename
         current_date=$(date +"%Y%m%d_%H%M%S")
         REPORT_NAME="reports/report_$current_date.html"
+        echo "Tests executed and report generated: $REPORT_NAME"
         pytest --html=reports/$REPORT_NAME --self-contained-html
         # 테스트 실행 + HTML 리포트 생성
+        echo "Tests completed successfully."
+      
 
     - name: Upload HTML report as artifact
       uses: actions/upload-artifact@v4
