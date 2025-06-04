@@ -3,8 +3,8 @@ name: Playwright Python Tests         # Github Actions 워크플로 이름
 on:                                   # 언제 워크플로가 실행될지 정의 (워크플로가 실행될 트리거 조건을 설정함)
   push:
     branches: [ main ]                # main 브랜치에 푸시될 때 실행
-  pull_request:
-    branches: [ main ]                # main 브랜치로 PR이 열릴 때 실행
+  #pull_request:
+    #branches: [ main ]                # main 브랜치로 PR이 열릴 때 실행
 
 jobs:                                 # 실제 실행되는 작업 정의
   test:                               # 작업 이름
@@ -21,16 +21,20 @@ jobs:                                 # 실제 실행되는 작업 정의
 
     - name: Install dependencies
       run: |                          # 필요한 패키지 설치
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pytest pytest-html
 
     - name: Run tests and generate HTML report
       run: |
-        pytest --html=report.html --self-contained-html
+        # Set the date and time format for the report filename
+        current_date=$(date +"%Y%m%d_%H%M%S")
+        REPORT_NAME="reports/report_$current_date.html"
+        pytest --html=reports/$REPORT_NAME --self-contained-html
         # 테스트 실행 + HTML 리포트 생성
 
     - name: Upload HTML report as artifact
       uses: actions/upload-artifact@v4
       with:
         name: pytest-report
-        path: report.html
+        path: reports/report_*.html
