@@ -22,9 +22,9 @@ class LoginPage:
         #     raise Exception("Element not found or not visible") 
     
     def login(self):
-        self.page.wait_for_selector("#email", state="visible", timeout=60000) # Wait for the email input to be visible
+        #self.page.wait_for_selector("#email", state="visible", timeout=60000) # Wait for the email input to be visible
         self.page.fill("#email", "lgc.jinwon+ukpc1@gmail.com")
-        self.page.wait_for_selector("#password", state="visible", timeout=60000) # Wait for the email input to be visible
+        #self.page.wait_for_selector("#password", state="visible", timeout=60000) # Wait for the email input to be visible
         self.page.fill("#password", "Lg@156699")
         self.click.click_by_id('button_user-login')
         
