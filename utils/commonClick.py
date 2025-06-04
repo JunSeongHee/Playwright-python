@@ -16,7 +16,10 @@ class commonClick:
 
     def click_by_xpath(self, xpath):
         try:
-            self.page.click(f"xpath={xpath}")
+            locator = self.page.locator(f"xpath={xpath}")
+            locator.wait_for(state='visible', timeout=30000)  # Wait for the element to be visible
+            locator.click()  # Click the element
+            #self.page.click(f"xpath={xpath}")
         except TimeoutError:
             print(f"Element with XPath '{xpath}' not found or not clickable.")
             raise
