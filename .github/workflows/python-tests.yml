@@ -36,10 +36,11 @@ jobs:                                 # 실제 실행되는 작업 정의
     - name: Run tests and generate HTML report
       run: |
         # Set the date and time format for the report filename
-        current_date=$(date +"%Y%m%d_%H%M%S")
-        REPORT_NAME="reports/report_$current_date.html"
-        echo "Tests executed and report generated: $REPORT_NAME"
-        pytest --html=reports/$REPORT_NAME --self-contained-html
+        #current_date=$(date +"%Y%m%d_%H%M%S")
+        #REPORT_NAME="reports/report_$current_date.html"
+        #echo "Tests executed and report generated: $REPORT_NAME"
+        #pytest --maxfail=1 --html=reports/$REPORT_NAME --self-contained-html
+        pytest
         # 테스트 실행 + HTML 리포트 생성
         echo "Tests completed successfully."
       
