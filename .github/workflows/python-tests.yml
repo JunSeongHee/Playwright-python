@@ -7,6 +7,8 @@ on:                                   # 언제 워크플로가 실행될지 정�
   pull_request:
     branches:
       - main                # main 브랜치로 PR이 열릴 때 실행
+  schedule:            # 정기적으로 실행되도록 설정
+    - cron: '0 10 * * *'
 
 jobs:                                 # 실제 실행되는 작업 정의
   test:                               # 작업 이름
@@ -22,7 +24,7 @@ jobs:                                 # 실제 실행되는 작업 정의
         echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # 현재 작업 디렉토리를 PYTHONPATH에 추가
         echo "HEADLESS=true" >> $GITHUB_ENV  # 리포트 파일 이름 설정
         echo "Environment variables set successfully."
-        
+
     - name: Set up Python
       uses: actions/setup-python@v4   # Python 설치
       with:
